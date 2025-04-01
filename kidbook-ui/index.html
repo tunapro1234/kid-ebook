@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuentos Mágicos Personalizados | Personalized Magic Stories</title>
+    <meta name="description" content="Genera cuentos personalizados para niños con inteligencia artificial | Generate personalized stories for children with artificial intelligence" />
+    <link href="https://fonts.googleapis.com/css2?family=Graphik:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+      // Detect browser language and set initial language preference
+      (function() {
+        try {
+          var userLang = navigator.language || navigator.userLanguage;
+          var savedLang = localStorage.getItem('language');
+          
+          // Only set if not already set
+          if (!savedLang) {
+            // Set default based on browser language
+            if (userLang.startsWith('es')) {
+              localStorage.setItem('language', 'es');
+            } else {
+              localStorage.setItem('language', 'en');
+            }
+          }
+        } catch (e) {
+          // Fallback if localStorage is not available
+          console.log('Language detection failed:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html> 
