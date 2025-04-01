@@ -7,6 +7,17 @@ const HomePage = () => {
   const { language } = useLanguage();
   const t = translations;
 
+  // Placeholder to use when image is not available
+  const demoBookPlaceholder = (
+    <div className="h-80 w-full max-w-2xl mx-auto bg-gray-100 rounded-lg shadow-xl flex items-center justify-center">
+      <div className="text-gray-500 text-center px-6">
+        {language === 'es' 
+          ? "Vista previa del libro personalizado" 
+          : "Preview of personalized book"}
+      </div>
+    </div>
+  );
+
   return (
     <div className="space-y-16">
       {/* Hero Section */}
@@ -47,10 +58,25 @@ const HomePage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
+            {/* Check if image exists and fallback to placeholder if not */}
             <img 
               src="/demo-book.png" 
-              alt="Ejemplo de libro personalizado" 
+              alt={language === 'es' ? "Ejemplo de libro personalizado" : "Example of personalized book"} 
               className="mx-auto max-w-full md:max-w-2xl rounded-lg shadow-xl"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentNode.appendChild(
+                  document.createRange().createContextualFragment(
+                    `<div class="h-80 w-full max-w-2xl mx-auto bg-gray-100 rounded-lg shadow-xl flex items-center justify-center">
+                      <div class="text-gray-500 text-center px-6">
+                        ${language === 'es' 
+                          ? "Vista previa del libro personalizado" 
+                          : "Preview of personalized book"}
+                      </div>
+                    </div>`
+                  )
+                );
+              }}
             />
           </motion.div>
         </div>
